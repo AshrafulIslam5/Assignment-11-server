@@ -1,0 +1,108 @@
+[
+    {
+        "RAZER": [
+            {
+                "name": "Razer Blade 15 Base Model Core i7 10th Gen",
+                "description": "Razer has finally brought a laptop that is truly is made for gamers. From the design to the intricate choice of components has made this laptop be the number one choice for any gamer. From sleek design a to the battery life this is the best portable gaming laptop in its generation.",
+                "img": "https://www.startech.com.bd/image/cache/catalog/laptop/razer/blade-15-base-model-core-i7-10th-gen/blade-15-base-model-core-i7-10th-gen-500x500.jpg",
+                "price": "180,000৳",
+                "quantity": 0,
+                "supplierName": "RAZER",
+                "specification": {
+                    "processor": "Intel Core i7-10750H Processor (12M Cache, 2.60 GHz up to 5.00 GHz)",
+                    "display": "15.6' Full HD 144Hz up to 100% sRGB 4.9 mm bezel Display",
+                    "ram": "16GB Dual-Channel RAM",
+                    "storage": "512GB NVMe SSD",
+                    "graphics": "NVIDIA RTX 2060 with 6GB Graphics",
+                    "operatingSystem": "Windows 10 Home",
+                    "Battery": "Built-in 65Wh rechargeable lithium-ion polymer battery"
+                }
+            },
+            {
+                "name": "Razer Book 13",
+                "description": "The new Razer Book 13 Laptop is a powerful slim laptop that weighs in at just 1.4Kg. This Razer Beast is powered by Intel Core i7-1165G7 Quad-Core Processor (12MB Cache, 2.80GHz up to 4.70GHz) and has 13.4' Full HD Matte 60Hz Slim side bezel Touch display with Up to 178° wide viewing angles.",
+                "img": "https://www.startech.com.bd/image/cache/catalog/laptop/razer/book-13/book-13-500x500.jpg",
+                "price": "195,000৳",
+                "quantity": 0,
+                "supplierName": "RAZER",
+                "specification": {
+                    "processor": "Intel Core i7-1165G7 Quad-Core Processor (12MB Cache, 2.80GHz up to 4.70GHz)",
+                    "display": "13.4' (1920 x 1200) Full HD Touch Display",
+                    "ram": "16GB Dual-Channel RAM",
+                    "storage": "512GB PCIe SSD",
+                    "graphics": "Intel Iris Xe Graphics",
+                    "operatingSystem": "Windows 10 Home",
+                    "Battery": "55 WHr"
+                }
+            },
+            {
+                "name": "Razer Blade 15 Advanced Model",
+                "description": "Razer Blade 15 Advanced Model Laptop powered by 11th Gen Intel Core i7-11800H 8 Cores (2.3GHz / 4.6GHz) with NVIDIA GeForce Graphics. This Razer Gaming Laptop featured with up to NVIDIA GeForce RTX3060 (6GB DDR6 VRAM) , and up to15.6' QHD 240Hz, 100% DCI-P3, G-Sync, 2.5ms, individually factory calibrated for an obscene competitive advantage in high-FPS games.",
+                "img": "https://www.startech.com.bd/image/cache/catalog/laptop/razer/blade-15-advanced-model/blade-15-advanced-model-01-500x500.jpg",
+                "price": "265,000৳",
+                "quantity": 0,
+                "supplierName": "RAZER",
+                "specification": {
+                    "processor": "Intel Core i7-11800H Processor (24M Cache, 2.30 GHz up to 4.60 GHz)",
+                    "display": "15.6' QHD (2560x1440) 240Hz Matte Display",
+                    "ram": "16GB DDR4 3200MHz RAM",
+                    "storage": "1TB SSD",
+                    "graphics": "NVIDIA GeForce RTX 3060 6GB Graphics",
+                    "operatingSystem": "Windows 10 Home (64-bit)",
+                    "Battery": "Built-in 65 Whr rechargeable lithium-ion polymer battery"
+                }
+            },
+            {
+                "name": "Razer 15 Advanced Model",
+                "description": "https://www.startech.com.bd/image/cache/catalog/laptop/razer/blade-15/base-model_1-500x500.jpg",
+                "img": "",
+                "price": "291,000৳",
+                "quantity": 0,
+                "supplierName": "",
+                "specification": {
+                    "processor": "Intel Core i7-10875H Processor (16M Cache, 2.30 GHz up to 5.10 GHz)",
+                    "display": "15.6' FHD Matte 300Hz Refresh Rate",
+                    "ram": "16GB DDR4 Ram",
+                    "storage": "1TB PCIe SSD",
+                    "graphics": "NVIDIA RTX 2080 SUPER Max-Q 8GB Graphics",
+                    "operatingSystem": "Windows 10 Home (64-bit)",
+                    "Battery": "Intel Wireless-AX201 (802.11a/b/g/n/ac/ax)"
+                }
+            },
+            {
+                "name": "Blade 14",
+                "description": "Razer Laptop has finally brought a laptop that is truly is made for gamers. The design to the intricate choice of components has made this laptop be the number one choice for any gamer. From sleek design to battery life this is the best portable gaming laptop in its generation.",
+                "img": "https://www.startech.com.bd/image/cache/catalog/laptop/razer/blade-14/blade-14-10-500x500.jpg",
+                "price": "325,000৳",
+                "quantity": 0,
+                "supplierName": "RAZER",
+                "specification": {
+                    "processor": "AMD Ryzen 9 5900HX Processor, 8 Cores / 16 Threads, 3.3GHz Base, 4.6GHz Max Boost",
+                    "display": "14-inch QHD 165Hz, 2560 x 1440 Display",
+                    "ram": "16GB DDR4-3200MHz (Fixed Onboard)",
+                    "storage": "1TB SSD (M.2 NVMe PCIe 3.0 x4)",
+                    "graphics": "NVIDIA GeForce RTX 3080 (8GB VRAM) Graphics",
+                    "operatingSystem": "Windows 10 Home (64-bit)",
+                    "Battery": "Built-in 61.6WHr rechargeable lithium-ion polymer battery"
+                }
+            },
+            {
+                "name": "Blade 15 Advanced Model",
+                "description": "Razer Blade 15 Advanced Model Laptop powered by Intel Core i9-11900H Processor (24M Cache, 2.50 GHz up to 4.80 GHz) with NVIDIA GeForce Graphics",
+                "img": "https://www.startech.com.bd/image/cache/catalog/laptop/razer/blade-15-advanced-model/blade-15-advanced-model-01-500x500.jpg",
+                "price": "340,000৳",
+                "quantity": 0,
+                "supplierName": "RAZER",
+                "specification": {
+                    "processor": "Intel Core i9-11900H Processor (24M Cache, 2.50 GHz up to 4.80 GHz)",
+                    "display": "15.6' OLED UHD, 100% DCI-P3, 1ms, HDR, Touch, Glossy, individually factory calibrated",
+                    "ram": "32GB DDR4 3200MHz dual-channel memory (slotted)",
+                    "storage": "1TB SSD (M.2 NVMe PCIe 4.0 x4) + Open M.2 PCIe 4.0 x4 Slot for easy expansion",
+                    "graphics": "NVIDIA GeForce RTX 3080 (16GB DDR6 VRAM)",
+                    "operatingSystem": "Windows 10 Home (64-bit)",
+                    "Battery": "Built-in 80 WHr rechargeable lithium-ion polymer battery"
+                }
+            }
+        ]
+    }
+]
