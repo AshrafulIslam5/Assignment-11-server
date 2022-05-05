@@ -8,20 +8,32 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.dbuserName}:${process.env.dbPassWord}@cluster0.rczhy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
-    await client.connect();
-    const LaptopStock = client.db('Star-Stock').collection('All-Laptops');
+    try {
+        await client.connect();
+        const LaptopStock = client.db('Star-Stock').collection('All-Laptops');
 
-    app.get('/laptops', async (req, res) => {
-        const query = {};
-        const cursor = LaptopStock.find(query);
-        const laptops = await cursor.toArray();
-        res.send(laptops);
-    })
+        app.get('/laptops', async (req, res) => {
+            const query = {};
+            const cursor = LaptopStock.find(query);
+            const laptops = await cursor.toArray();
+            res.send(laptops);
+        })
+
+        app.get('/laptops/brand/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const brand = await LaptopStock.findOne(query);
+            res.send(service);
+        })
+    }
+    finally {
+
+    }
 }
 
 
