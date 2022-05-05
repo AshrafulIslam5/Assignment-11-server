@@ -28,7 +28,7 @@ async function run() {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const brand = await LaptopStock.findOne(query);
-            res.send(service);
+            res.send(brand);
         })
     }
     finally {
