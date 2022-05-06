@@ -31,6 +31,20 @@ async function run() {
             res.send(product);
         })
 
+        // update quantity
+        app.put('/laptops/:id', async (req, res) => {
+            const id = req.params.id;
+            const newQuantity = req.body;
+            const query = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updatedQuantity = {
+                $set: {
+                    quantity: newQuantity.quantity
+                }
+            }
+            const finalQuantity = await LaptopStock.updateOne(query, updatedQuantity, options);
+            res.send(finalQuantity);
+        })
 
     }
     finally {
