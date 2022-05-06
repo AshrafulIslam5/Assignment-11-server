@@ -31,7 +31,7 @@ async function run() {
             res.send(product);
         })
 
-        // update quantity by one
+        
         app.put('/laptops/:id', async (req, res) => {
             const id = req.params.id;
             const newUpdatedQuantity = req.body;
@@ -39,27 +39,11 @@ async function run() {
             const options = { upsert: true };
             const updatedQuantity = {
                 $set: {
-                    quantity: newUpdatedQuantity.quanRemoveAddOne
+                    quantity: newUpdatedQuantity.addOrRemove
                 }
             }
             const GivenQuantity = await LaptopStock.updateOne(filter, updatedQuantity, options);
             res.send(GivenQuantity);
-        })
-
-
-        // update many quantity
-        app.put('/laptops/:id', async (req, res) => {
-            const id = req.params.id;
-            const newQuantity = req.body;
-            const query = { _id: ObjectId(id) };
-            const options = { upsert: true };
-            const updatedQuantity = {
-                $set: {
-                    quantity: newQuantity
-                }
-            }
-            const finalQuantity = await LaptopStock.updateOne(query, updatedQuantity, options);
-            res.send(finalQuantity)
         })
 
     }
