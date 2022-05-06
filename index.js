@@ -53,6 +53,12 @@ async function run() {
             res.send(GivenQuantity);
         })
 
+        // add a product
+        app.post('/laptops', async (req, res) => {
+            const newLaptop = req.body;
+            const finalResult = await LaptopStock.insertOne(newLaptop);
+            res.send(finalResult);
+        })
 
         // delete a product
         app.delete('/laptops/:id', async (req, res) => {
