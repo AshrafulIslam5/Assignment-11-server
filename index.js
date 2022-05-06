@@ -24,12 +24,14 @@ async function run() {
             res.send(laptops);
         })
 
-        app.get('/laptops/brand/:id', async (req, res) => {
+        app.get('/laptops/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
-            const brand = await LaptopStock.findOne(query);
-            res.send(brand);
+            const product = await LaptopStock.findOne(query);
+            res.send(product);
         })
+
+
     }
     finally {
 
