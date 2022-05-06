@@ -34,16 +34,16 @@ async function run() {
         // update quantity by one
         app.put('/laptops/:id', async (req, res) => {
             const id = req.params.id;
-            const newQuantity = req.body;
+            const newUpdatedQuantity = req.body;
             const filter = { _id: ObjectId(id) };
             const options = { upsert: true };
             const updatedQuantity = {
                 $set: {
-                    quantity: newQuantity.quanRemoveAddOne
+                    quantity: newUpdatedQuantity.quanRemoveAddOne
                 }
             }
-            const finalQuantity = await LaptopStock.updateOne(filter, updatedQuantity, options);
-            res.send(finalQuantity);
+            const GivenQuantity = await LaptopStock.updateOne(filter, updatedQuantity, options);
+            res.send(GivenQuantity);
         })
 
 
