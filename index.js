@@ -35,11 +35,12 @@ async function run() {
         app.put('/laptops/:id', async (req, res) => {
             const id = req.params.id;
             const newQuantity = req.body;
+            console.dir(req.body);
             const query = { _id: ObjectId(id) };
             const options = { upsert: true };
             const updatedQuantity = {
                 $set: {
-                    quantity: newQuantity.newQuan
+                    quantity: newQuantity.quanAfterSub
                 }
             }
             const finalQuantity = await LaptopStock.updateOne(query, updatedQuantity, options);
