@@ -6,12 +6,7 @@ const app = express();
 
 // middleware of the server
 app.use(express.json());
-const corsConfig = {
-    origin: true,
-    credentials: true,
-}
-app.use(cors(corsConfig))
-app.options('*', cors(corsConfig))
+app.use(cors());
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.dbuserName}:${process.env.dbPassWord}@cluster0.rczhy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
@@ -44,11 +39,11 @@ async function run() {
             const options = { upsert: true };
             const updatedQuantity = {
                 $set: {
-                    newQuantity
+                    quantity: newQuantity.newQuan
                 }
             }
             const finalQuantity = await LaptopStock.updateOne(query, updatedQuantity, options);
-            res.send(finalQuantity);
+            res.send(finalQuantity)
         })
 
     }
