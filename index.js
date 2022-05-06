@@ -55,7 +55,7 @@ async function run() {
             const options = { upsert: true };
             const updatedQuantity = {
                 $set: {
-                    quantity: newQuantity.quanAfterSub
+                    quantity: newQuantity.quanRemoveAddOne
                 }
             }
             const finalQuantity = await LaptopStock.updateOne(query, updatedQuantity, options);
