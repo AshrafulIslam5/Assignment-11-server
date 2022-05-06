@@ -1,14 +1,20 @@
 const express = require('express');
-const cors = require('cors');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
+const cors = require('cors');
 const app = express();
 
 // middleware of the server
 app.use(express.json());
-app.use(cors());
+// Middlewares
+const corsConfig = {
+    origin: true,
+    credentials: true,
+    }
+    app.use(cors(corsConfig))
+    app.options('*', cors(corsConfig))
 
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.dbuserName}:${process.env.dbPassWord}@cluster0.rczhy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
