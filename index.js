@@ -73,7 +73,7 @@ async function run() {
         // for my items
         app.get('/myItems', async (req, res) => {
             const query = {};
-            const cursor = LaptopStock.find(query);
+            const cursor = addedItems.find(query);
             const myItems = await cursor.toArray();
             res.send(myItems);
         })
