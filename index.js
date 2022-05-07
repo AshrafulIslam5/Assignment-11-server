@@ -35,7 +35,7 @@ async function run() {
         })
 
         // json Web Token
-        app.get('/token', async (req, res) => {
+        app.post('/token', async (req, res) => {
             const user = req.body;
             const token = jwt.sign(user, process.env.Token_Secret, {
                 expiresIn: '1d'
