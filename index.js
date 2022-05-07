@@ -23,6 +23,8 @@ async function run() {
     try {
         await client.connect();
         const LaptopStock = client.db('Star-Stock').collection('All-Laptops');
+        const addedItems = client.db('Star-Stock').collection('Added-Laptops')
+        
         // to get all products
         app.get('/laptops', async (req, res) => {
             const query = {};
@@ -30,6 +32,14 @@ async function run() {
             const laptops = await cursor.toArray();
             res.send(laptops);
         })
+
+        // addedProducts collection
+        app.post('/myItems', async (req, res) => {
+            const newItem = req.body;
+            const result = await addedItems.insertOne(newItem);
+            res.send(result);
+        })
+
         // to get a single product
         app.get('/laptops/:id', async (req, res) => {
             const id = req.params.id;
