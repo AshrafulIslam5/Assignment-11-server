@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
@@ -31,6 +32,15 @@ async function run() {
             const cursor = LaptopStock.find(query);
             const laptops = await cursor.toArray();
             res.send(laptops);
+        })
+
+        // json Web Token
+        app.get('/token', async (req, res) => {
+            const user = req.body;
+            const token = jwt.sign(user, process.env.Token_Secret, {
+                expiresIn: '1d'
+            });
+            res.send({ token });
         })
 
         // addedProducts collection
