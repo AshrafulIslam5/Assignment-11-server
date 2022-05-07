@@ -72,8 +72,9 @@ async function run() {
 
         // for my items
         app.get('/myItems', async (req, res) => {
-            const query = {};
-            const cursor = addedItems.find(query);
+            const query = req.query.email;
+            const email = {email: query};
+            const cursor = addedItems.find(email);
             const myItems = await cursor.toArray();
             res.send(myItems);
         })
