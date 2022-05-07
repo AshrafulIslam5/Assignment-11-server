@@ -60,6 +60,14 @@ async function run() {
             res.send(finalResult);
         })
 
+        // for my items
+        app.get('/myItems', async (req, res) => {
+            const query = {};
+            const cursor = LaptopStock.find(query);
+            const myItems = await cursor.toArray();
+            res.send(myItems);
+        })
+
         // delete a product
         app.delete('/laptops/:id', async (req, res) => {
             const id = req.params.id;
