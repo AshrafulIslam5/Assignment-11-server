@@ -4,7 +4,6 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 const cors = require('cors');
-const query = require('express/lib/middleware/query');
 const app = express();
 
 // middleware of the server
@@ -18,21 +17,20 @@ app.use(cors(corsConfig))
 app.options('*', cors(corsConfig))
 
 function verifyToken(req, res, next) {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-        return res.status(401).send({ messgae: 'unauthorized access' })
+    const headerToken = req.headers.authorization;
+    if (!headerToken) {
+        return res.status(401).send({ message: 'unauthorized access' })
     }
-    const verifingToken = authHeader.split(' ')[1];
-    jwt.verify(verifingToken, process.env.Token_Secret, (err, decoded) => {
+    const recievedToken = headerToken.split(' ')[1];
+    jwt.verify(recievedToken, process.env.Token_Secret, function (err, decoded) {
         if (err) {
-            return res.status(403).send({ messgae: 'Forbidden access' })
+            return res.status(403).send({ message: 'forbidden' })
         }
+        console.log(decoded)
         req.decoded = decoded;
         next();
     })
 }
-
-
 
 const uri = `mongodb+srv://${process.env.dbuserName}:${process.env.dbPassWord}@cluster0.rczhy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -43,22 +41,20 @@ async function run() {
         const LaptopStock = client.db('Star-Stock').collection('All-Laptops');
         const addedItems = client.db('Star-Stock').collection('Added-Laptops')
 
+        // JWT
+        app.post('/getToken', async (req, res) => {
+            const adder = req.body;
+            const accessToken = jwt.sign(adder, process.env.Token_Secret, { expiresIn: '1d' });
+            res.send({ accessToken });
+        })
+
+
         // to get all products
         app.get('/laptops', async (req, res) => {
             const query = {};
             const cursor = LaptopStock.find(query);
             const laptops = await cursor.toArray();
             res.send(laptops);
-        })
-
-
-        // json Web Token
-        app.post('/token', async (req, res) => {
-            const user = req.body;
-            const token = jwt.sign(user, process.env.Token_Secret, {
-                expiresIn: '1d'
-            });
-            res.send({ token });
         })
 
         // addedProducts collection
@@ -100,17 +96,27 @@ async function run() {
 
         // for my items
         app.get('/myItems', verifyToken, async (req, res) => {
+            // changed both to lowercase so that sometimes some email address change from uppercase to lower case
             const decodedEmail = req.decoded.email;
+            const finalDecodedEmail = decodedEmail.toLowerCase();
             const email = req.query.email;
-            if (email === decodedEmail) {
+            const finalEmail = email.toLowerCase()
+            if (finalEmail === finalDecodedEmail) {
                 const query = { email: email };
                 const cursor = addedItems.find(query);
                 const myItems = await cursor.toArray();
                 res.send(myItems);
             }
             else {
-                 res.status(403).send({ messgae: 'Forbidden access' })
+                res.status(403).send({ message: 'Forbidden' })
             }
+        })
+        // 
+        app.get('/myItmes/:id', verifyToken, async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const product = await addedItems.findOne(query);
+            res.send(product);
         })
 
         // delete a product
@@ -119,7 +125,16 @@ async function run() {
             const query = { _id: ObjectId(id) }
             const result = await LaptopStock.deleteOne(query);
             res.send(result)
+        });
+        // delete from my items
+        app.delete('/myItems/:id',verifyToken, async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) }
+            const result = await addedItems.deleteOne(query);
+            
+            res.send(result);
         })
+
 
     }
     finally {
