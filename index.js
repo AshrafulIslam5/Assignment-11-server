@@ -17,6 +17,23 @@ const corsConfig = {
 app.use(cors(corsConfig))
 app.options('*', cors(corsConfig))
 
+function verifyToken(req, res, next) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(401).send({ messgae: 'unauthorized access' })
+    }
+    const verifingToken = authHeader.split(' ')[1];
+    jwt.verify(verifingToken, process.env.Token_Secret, (error, decoded) => {
+        if (error) {
+            return res.status(403).send({ messgae: 'Forbidden access' })
+        }
+        req.decoded = decoded;
+    })
+    next();
+}
+
+
+
 const uri = `mongodb+srv://${process.env.dbuserName}:${process.env.dbPassWord}@cluster0.rczhy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
@@ -25,7 +42,7 @@ async function run() {
         await client.connect();
         const LaptopStock = client.db('Star-Stock').collection('All-Laptops');
         const addedItems = client.db('Star-Stock').collection('Added-Laptops')
-        
+
         // to get all products
         app.get('/laptops', async (req, res) => {
             const query = {};
@@ -34,13 +51,18 @@ async function run() {
             res.send(laptops);
         })
 
+
+        //
+
         // json Web Token
         app.post('/token', async (req, res) => {
             const user = req.body;
+            console.log(process.env.Token_Secret)
             const token = jwt.sign(user, process.env.Token_Secret, {
                 expiresIn: '1d'
             });
             res.send({ token });
+            console.log(token)
         })
 
         // addedProducts collection
@@ -81,12 +103,18 @@ async function run() {
         })
 
         // for my items
-        app.get('/myItems', async (req, res) => {
+        app.get('/myItems', verifyToken, async (req, res) => {
+            const decodedEmail = req.decoded.email;
             const query = req.query.email;
-            const email = {email: query};
-            const cursor = addedItems.find(email);
-            const myItems = await cursor.toArray();
-            res.send(myItems);
+            if (email === decodedEmail) {
+                const email = { email: query };
+                const cursor = addedItems.find(email);
+                const myItems = await cursor.toArray();
+                res.send(myItems);
+            }
+            else {
+                return res.status(403).send({ messgae: 'Forbidden access' })
+            }
         })
 
         // delete a product
