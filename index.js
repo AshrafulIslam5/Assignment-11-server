@@ -28,8 +28,8 @@ function verifyToken(req, res, next) {
             return res.status(403).send({ messgae: 'Forbidden access' })
         }
         req.decoded = decoded;
+        next();
     })
-    next();
 }
 
 
@@ -52,17 +52,13 @@ async function run() {
         })
 
 
-        //
-
         // json Web Token
         app.post('/token', async (req, res) => {
             const user = req.body;
-            console.log(process.env.Token_Secret)
             const token = jwt.sign(user, process.env.Token_Secret, {
                 expiresIn: '1d'
             });
             res.send({ token });
-            console.log(token)
         })
 
         // addedProducts collection
@@ -105,15 +101,15 @@ async function run() {
         // for my items
         app.get('/myItems', verifyToken, async (req, res) => {
             const decodedEmail = req.decoded.email;
-            const query = req.query.email;
-            if (query === decodedEmail) {
-                const email = { email: query };
-                const cursor = addedItems.find(email);
+            const email = req.query.email;
+            if (email === decodedEmail) {
+                const query = { email: email };
+                const cursor = addedItems.find(query);
                 const myItems = await cursor.toArray();
                 res.send(myItems);
             }
             else {
-                return res.status(403).send({ messgae: 'Forbidden access' })
+                res.status(403).send({ messgae: 'Forbidden access' })
             }
         })
 
