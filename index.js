@@ -126,6 +126,13 @@ async function run() {
             const result = await LaptopStock.deleteOne(query);
             res.send(result)
         });
+        // delete a product using name
+        app.delete('/laptops/:name', async (req, res) => {
+            const name = req.params.name;
+            const query = { name: name }
+            const result = await LaptopStock.deleteOne(query);
+            res.send(result)
+        });
         // delete from my items
         app.delete('/myItems/:name',verifyToken, async (req, res) => {
             const name = req.params.name;
