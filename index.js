@@ -23,8 +23,8 @@ function verifyToken(req, res, next) {
         return res.status(401).send({ messgae: 'unauthorized access' })
     }
     const verifingToken = authHeader.split(' ')[1];
-    jwt.verify(verifingToken, process.env.Token_Secret, (error, decoded) => {
-        if (error) {
+    jwt.verify(verifingToken, process.env.Token_Secret, (err, decoded) => {
+        if (err) {
             return res.status(403).send({ messgae: 'Forbidden access' })
         }
         req.decoded = decoded;
@@ -109,7 +109,7 @@ async function run() {
                 res.send(myItems);
             }
             else {
-                res.status(403).send({ messgae: 'Forbidden access' })
+                 res.status(403).send({ messgae: 'Forbidden access' })
             }
         })
 
