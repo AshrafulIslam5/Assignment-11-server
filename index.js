@@ -106,7 +106,7 @@ async function run() {
         app.get('/myItems', verifyToken, async (req, res) => {
             const decodedEmail = req.decoded.email;
             const query = req.query.email;
-            if (email === decodedEmail) {
+            if (query === decodedEmail) {
                 const email = { email: query };
                 const cursor = addedItems.find(email);
                 const myItems = await cursor.toArray();
