@@ -127,9 +127,9 @@ async function run() {
             res.send(result)
         });
         // delete from my items
-        app.delete('/myItems/:id',verifyToken, async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) }
+        app.delete('/myItems/:name',verifyToken, async (req, res) => {
+            const name = req.params.name;
+            const query = { name: name}
             const result = await addedItems.deleteOne(query);
             
             res.send(result);
