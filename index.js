@@ -26,7 +26,6 @@ function verifyToken(req, res, next) {
         if (err) {
             return res.status(403).send({ message: 'forbidden' })
         }
-        console.log(decoded)
         req.decoded = decoded;
         next();
     })
@@ -96,7 +95,6 @@ async function run() {
 
         // for my items
         app.get('/myItems', verifyToken, async (req, res) => {
-            
             const decodedEmail = req.decoded.email;
             const email = req.query.email;
             if (email === decodedEmail) {
