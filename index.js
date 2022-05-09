@@ -96,12 +96,10 @@ async function run() {
 
         // for my items
         app.get('/myItems', verifyToken, async (req, res) => {
-            // changed both to lowercase so that sometimes some email address change from uppercase to lower case
+            
             const decodedEmail = req.decoded.email;
-            const finalDecodedEmail = decodedEmail.toLowerCase();
             const email = req.query.email;
-            const finalEmail = email.toLowerCase()
-            if (finalEmail === finalDecodedEmail) {
+            if (email === decodedEmail) {
                 const query = { email: email };
                 const cursor = addedItems.find(query);
                 const myItems = await cursor.toArray();
